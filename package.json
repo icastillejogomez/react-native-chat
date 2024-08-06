@@ -1,0 +1,24 @@
+{
+  "name": "react-native-realtime-chat",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icastillejogomez/react-native-realtime-chat.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-native",
+    "chat"
+  ],
+  "author": "Ignacio F. Castillejo Gómez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/icastillejogomez/react-native-realtime-chat/issues"
+  },
+  "homepage": "https://github.com/icastillejogomez/react-native-realtime-chat#readme",
+  "description": ""
+}
