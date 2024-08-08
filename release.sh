@@ -12,25 +12,29 @@ if [ -z "$1" ]; then
 fi
 
 # Check if j1 command is available under node_modules/.bin/jq
-if ! [ -x "$(command -v jq)" ]; then
+if ! [ -x "$(command -v ./node_modules/.bin/jq)" ]; then
   echo "jq is not installed. Please install running 'npm install' and try again."
   exit 1
 fi
 
-# First execute push and commit hook
-if ! ./.husky/pre-commit; then
-  echo "pre-commit hook failed. The release will be stopped."
+if ! npm run lint; then
+  echo "Linting failed. The release will be stopped."
   exit 1
 fi
 
-if ! ./.husky/pre-push; then
-  echo "pre-push hook failed. The release will be stopped."
+if ! npm run check-types; then
+  echo "Type checking failed. The release will be stopped."
+  exit 1
+fi
+
+if ! npm run test; then
+  echo "Testing failed. The release will be stopped."
   exit 1
 fi
 
 # Update package.json with the new version
-jq --arg ver "$1" '.version = $ver' package.json > package.json.tmp && mv package.json.tmp package.json
-jq --arg ver "$1" '.version = $ver' package-lock.json > package-lock.json.tmp && mv package-lock.json.tmp package-lock.json
+./node_modules/.bin/jq --arg ver "$1" '.version = $ver' package.json > package.json.tmp && mv package.json.tmp package.json
+./node_modules/.bin/jq --arg ver "$1" '.version = $ver' package-lock.json > package-lock.json.tmp && mv package-lock.json.tmp package-lock.json
 
 # Create the commit
 git add .
