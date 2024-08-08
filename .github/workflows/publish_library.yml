@@ -8,13 +8,22 @@ on:
 
 
 jobs:
+
   publish:
     runs-on: ubuntu-latest
     steps:
+    
       - uses: actions/checkout@v4
+    
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
+    
+      - uses: actions/cache@v3
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+    
       - uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_ACCESS_TOKEN }}
