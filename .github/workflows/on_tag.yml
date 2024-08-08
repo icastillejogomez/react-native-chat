@@ -30,7 +30,7 @@ jobs:
   publish:
     name: Containerizing
     needs: [qa, version-parser]
-    uses: ./.github/workflows/containerizing.yml
+    uses: ./.github/workflows/publish_library.yml
     secrets:
       NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 

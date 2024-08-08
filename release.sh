@@ -36,6 +36,8 @@ fi
 ./node_modules/.bin/jq --arg ver "$1" '.version = $ver' package.json > package.json.tmp && mv package.json.tmp package.json
 ./node_modules/.bin/jq --arg ver "$1" '.version = $ver' package-lock.json > package-lock.json.tmp && mv package-lock.json.tmp package-lock.json
 
+# rm package.json.tmp package-lock.json.tmp 
+
 # Create the commit
 git add .
 git commit -m "Upgrade to v$1" -n
