@@ -40,7 +40,7 @@ jq --arg ver "$1" '.version = $ver' package-lock.json > package-lock.json.tmp &&
 
 # Create the commit
 git add .
-git commit -m "Upgrade to v$1" -n
+git commit -m "chore: Upgrade to v$1" -n
 
 # Create the tag
 git tag "v$1"
