@@ -27,3 +27,7 @@ jobs:
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: |
           npm ci
+
+      - name: Check signatures
+        run: |
+          npm audit signatures
