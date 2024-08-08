@@ -2,13 +2,6 @@ name: Install project dependencies
 
 on:
   workflow_call:
-    inputs:
-      BACKOFFICE_FRONTEND_WEBSITE_PATH:
-        required: true
-        type: string
-      BACKEND_CMS_PATH:
-        required: true
-        type: string
 
 jobs:
 
