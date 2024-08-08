@@ -28,7 +28,7 @@ jobs:
     uses: ./.github/workflows/qa.yml
 
   publish:
-    name: Containerizing
+    name: Publish
     needs: [qa]
     uses: ./.github/workflows/publish_library.yml
     secrets:
