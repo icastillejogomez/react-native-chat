@@ -1,0 +1,36 @@
+name: Install project dependencies
+
+on:
+  workflow_call:
+    inputs:
+      BACKOFFICE_FRONTEND_WEBSITE_PATH:
+        required: true
+        type: string
+      BACKEND_CMS_PATH:
+        required: true
+        type: string
+
+jobs:
+
+  install-dependencies:
+    name: Install dependencies
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: 'Starting cache'
+        id: npm-cache
+        uses: actions/cache@v3
+        with:
+            path: 'node_modules'
+            key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies if needed
+        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
+        run: |
+          npm ci
