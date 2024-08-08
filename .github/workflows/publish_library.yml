@@ -2,6 +2,9 @@ name: Publish library
 
 on:
   workflow_call:
+    secrets:
+      NPM_ACCESS_TOKEN:
+        required: true
 
 
 jobs:
