@@ -12,7 +12,7 @@ if [ -z "$1" ]; then
 fi
 
 # Check if j1 command is available under node_modules/.bin/jq
-if ! [ -x "$(command -v ./node_modules/.bin/jq)" ]; then
+if ! [ -x "$(command -v jq)" ]; then
   echo "jq is not installed. Please install running 'npm install' and try again."
   exit 1
 fi
@@ -33,8 +33,8 @@ if ! npm run test; then
 fi
 
 # Update package.json with the new version
-./node_modules/.bin/jq --arg ver "$1" '.version = $ver' package.json > package.json.tmp && mv package.json.tmp package.json
-./node_modules/.bin/jq --arg ver "$1" '.version = $ver' package-lock.json > package-lock.json.tmp && mv package-lock.json.tmp package-lock.json
+jq --arg ver "$1" '.version = $ver' package.json > package.json.tmp && mv package.json.tmp package.json
+jq --arg ver "$1" '.version = $ver' package-lock.json > package-lock.json.tmp && mv package-lock.json.tmp package-lock.json
 
 # rm package.json.tmp package-lock.json.tmp 
 
