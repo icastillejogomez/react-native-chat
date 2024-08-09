@@ -1,0 +1,23 @@
+name: On release published
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  install-dependencies:
+    name: Install dependencies
+    uses: ./.github/workflows/install_dependencies.yml
+
+  qa:
+    name: QA
+    needs: [install-dependencies]
+    uses: ./.github/workflows/qa.yml
+
+  publish:
+    name: Publish
+    needs: [qa]
+    uses: ./.github/workflows/publish_library.yml
+    secrets:
+      NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
